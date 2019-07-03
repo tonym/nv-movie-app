@@ -6,9 +6,11 @@
 
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import routeConstants from './constants/routeConstants';
 import HomeView from './views/HomeView';
 import LoginView from './views/LoginView';
 
@@ -18,21 +20,23 @@ const theme = createMuiTheme({
   }
 });
 
-const PrivateRoute = ({ component: Component, ...rest }: any) => (
+const PrivateRoute = ({ component: Component, authed, ...rest }: any) => (
 
   <Route {...rest} render={(props) => (
-
-    localStorage.getItem('user')
+      authed
       ? <Component {...props} />
       : <Redirect to={{
-          pathname: '/login',
+          pathname: routeConstants.LOGIN,
           state: { from: props.location }
         }} />
   )} />
 
 );
 
-const App: React.FC = () => {
+const App: React.FC = (props: any) => {
+
+  const { user } = props.auth;
+
   return (
     <React.Fragment>
       <MuiThemeProvider theme={theme}>
@@ -40,8 +44,8 @@ const App: React.FC = () => {
         <BrowserRouter>
           <div className="app">
             <Switch>
-              <PrivateRoute path="/" exact component={HomeView} />
-              <Route path="/login" component={LoginView} />
+              <PrivateRoute path={routeConstants.ROOT} exact component={HomeView} />
+              <Route path={routeConstants.LOGIN} component={LoginView} authed={user} />
             </Switch>
           </div>
         </BrowserRouter>
@@ -50,4 +54,10 @@ const App: React.FC = () => {
   );
 }
 
-export default App;
+function mapStateToProps(state: object) {
+
+  return state;
+
+}
+
+export default connect(mapStateToProps)(App);
