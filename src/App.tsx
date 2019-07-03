@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import Header from './components/Header';
 import routeConstants from './constants/routeConstants';
 import HomeView from './views/HomeView';
 import LoginView from './views/LoginView';
@@ -43,6 +44,7 @@ const App: React.FC = (props: any) => {
         <CssBaseline />
         <BrowserRouter>
           <div className="app">
+            <Header />
             <Switch>
               <PrivateRoute path={routeConstants.ROOT} exact component={HomeView} />
               <Route path={routeConstants.LOGIN} component={LoginView} authed={user} />
@@ -55,9 +57,7 @@ const App: React.FC = (props: any) => {
 }
 
 function mapStateToProps(state: object) {
-
   return state;
-
 }
 
 export default connect(mapStateToProps)(App);
