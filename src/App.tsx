@@ -36,7 +36,7 @@ const PrivateRoute = ({ component: Component, authed, ...rest }: any) => (
 
 const App: React.FC = (props: any) => {
 
-  const { user } = props.auth;
+  const { user } = props;
 
   return (
     <React.Fragment>
@@ -56,8 +56,8 @@ const App: React.FC = (props: any) => {
   );
 }
 
-function mapStateToProps(state: object) {
-  return state;
+function mapStateToProps(state: { auth: any }) {
+  return state.auth;
 }
 
 export default connect(mapStateToProps)(App);

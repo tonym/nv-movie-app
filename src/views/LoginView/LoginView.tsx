@@ -1,10 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import createStyles from '@material-ui/core/styles/createStyles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
-import withStyles from '@material-ui/core/styles/withStyles';
+import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -15,7 +18,9 @@ const styles = (theme: Theme) => createStyles({
   }
 });
 
-const LoginView: React.FC = (props: any) => {
+interface Props extends WithStyles<typeof styles> {};
+
+const LoginView: React.FC<Props> = props => {
 
   const { classes } = props;
 
@@ -29,10 +34,4 @@ const LoginView: React.FC = (props: any) => {
 
 }
 
-function mapStateToProps(state: object) {
-  return state;
-}
-
-const styledComponent = withStyles(styles)(LoginView);
-
-export default connect(mapStateToProps)(styledComponent);
+export default withStyles(styles)(LoginView);

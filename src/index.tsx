@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import  { Provider } from 'react-redux';
-import storeHelper from './helpers/storeHelper';
+import { Provider } from 'react-redux';
+import { appStore } from './store';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <Provider store={storeHelper}>
+  <Provider store={appStore}>
     <App />
   </Provider>,
   document.getElementById('root')

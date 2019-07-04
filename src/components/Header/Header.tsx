@@ -5,12 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import createStyles from '@material-ui/core/styles/createStyles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
-import withStyles from '@material-ui/core/styles/withStyles';
-
-interface props {
-  classes: any;
-  user?: string;
-}
+import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -18,7 +13,11 @@ const styles = (theme: Theme) => createStyles({
   }
 });
 
-const Header: React.FC<props> = (props) => {
+interface Props extends WithStyles<typeof styles> {
+  user?: string;
+};
+
+const Header: React.FC<Props> = (props) => {
 
   const { classes, user } = props;
 
@@ -30,7 +29,7 @@ const Header: React.FC<props> = (props) => {
           {
             user ?
             <Typography color="inherit" variant="h5">I am an appbar</Typography> :
-            <Typography color="inherit" variant="h5">Login and find the perfect movie to watch</Typography>
+            <Typography color="inherit" variant="h5">Login</Typography>
           }
           </Grid>
           <Grid item>
