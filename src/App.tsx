@@ -44,7 +44,7 @@ const App: React.FC = (props: any) => {
         <CssBaseline />
         <BrowserRouter>
           <div className="app">
-            <Header />
+            <Header user={user} />
             <Switch>
               <PrivateRoute path={routeConstants.ROOT} exact component={HomeView} />
               <Route path={routeConstants.LOGIN} component={LoginView} authed={user} />
