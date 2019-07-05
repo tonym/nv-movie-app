@@ -11,7 +11,7 @@ const initialState: AuthState = {
   user: '',
 };
 
-const reducer: Reducer<AuthState> = (state = initialState, action) => {
+const authReducer: Reducer<AuthState> = (state = initialState, action) => {
   switch(action.type) {
     case AuthActionTypes.LOGIN:
       return { ...state, user: action.payload };
@@ -22,4 +22,4 @@ const reducer: Reducer<AuthState> = (state = initialState, action) => {
   }
 };
 
-export { reducer as authReducer };
+export { authReducer };

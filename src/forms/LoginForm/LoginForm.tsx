@@ -31,7 +31,7 @@ const styles = (theme: Theme) => createStyles({
  * WithStyles allows us to stay DRY by using the styles object to keep it type safe
  */
 interface Props extends WithStyles<typeof styles> {
-  callback?: (event: React.FormEvent<HTMLInputElement>) => void;
+  callback: (values: Values) => void;
 };
 
 interface Values {
@@ -56,7 +56,7 @@ const LoginForm: React.FC<Props> = props => {
     setValues({ ...values, [event.target.name]: event.target.value });
   }
 
-  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>): void => {
+  const handleSubmit = () => {
     let error: boolean = false;
 
     for(const value in values) {

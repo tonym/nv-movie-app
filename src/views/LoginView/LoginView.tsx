@@ -5,6 +5,8 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -13,8 +15,10 @@ import Typography from '@material-ui/core/Typography';
 import createStyles from '@material-ui/core/styles/createStyles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
-import { AppState } from '../../store';
+import { AppState, ConnectedReduxProps } from '../../store';
+import { login } from '../../store/auth';
 import LoginForm from '../../forms/LoginForm';
+import routeConstants from '../../constants/routeConstants';
 
 /**
  * Styles for HTML elements, and any child component overrides
@@ -40,16 +44,36 @@ const styles = (theme: Theme) => createStyles({
  * WithStyles allows us to stay DRY by using the styles object to keep it type safe
  */
 interface Props extends WithStyles<typeof styles> {
-  app: AppState
+  app: AppState;
 };
 
-const LoginView: React.FC<Props> = props => {
+interface Values {
+  [index: string]: string;
+  user: string | '';
+  password: string | '';
+}
+
+interface PropsFromDispatch {
+  login: typeof login;
+}
+
+type AllProps = Props &
+  ConnectedReduxProps &
+  PropsFromDispatch &
+  RouteComponentProps<{}>;
+
+const LoginView: React.FC<AllProps> = props => {
 
   /**
    * the styles from above are added to the component props
    * by the HOC 'withStyles' as 'classes'
    */
-  const { classes } = props;
+  const { classes, history } = props;
+
+  const loginFormCallback = async (values: Values) => {
+    props.login(values.user);
+    history.push(routeConstants.ROOT);
+  }
 
   return (
     <div className={classes.root}>
@@ -57,7 +81,7 @@ const LoginView: React.FC<Props> = props => {
         <Card className={classes.card}>
           <CardHeader title="Login" titleTypographyProps={{align: 'center'}} />
           <CardContent>
-            <LoginForm />
+            <LoginForm callback={loginFormCallback} />
           </CardContent>
         </Card>
         <Typography className={classes.caption} paragraph variant="caption">
@@ -71,4 +95,10 @@ const LoginView: React.FC<Props> = props => {
 
 }
 
-export default withStyles(styles)(LoginView);
+const mapDispatchToProps = {
+  login
+}
+
+const styledComponent = withStyles(styles)(LoginView);
+
+export default withRouter(connect(undefined, mapDispatchToProps)(styledComponent));

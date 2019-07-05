@@ -64,8 +64,8 @@ const App: React.FC<AppState> = props => {
           <div className="app">
           <Header user={user} />
             <Switch>
-              <PrivateRoute path={routeConstants.ROOT} exact component={HomeView} />
-              <Route path={routeConstants.LOGIN} component={LoginView} authed={user} />
+              <PrivateRoute path={routeConstants.ROOT} exact component={HomeView} authed={user} />
+              <Route path={routeConstants.LOGIN} component={LoginView} />
             </Switch>
           </div>
         </BrowserRouter>

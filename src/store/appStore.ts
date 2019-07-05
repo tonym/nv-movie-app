@@ -7,12 +7,9 @@
 import {
   Action,
   AnyAction,
-  applyMiddleware,
   combineReducers,
-  createStore,
   Dispatch
 } from 'redux';
-import thunkMiddleware from 'redux-thunk';
 import {
   authReducer,
   AuthState
@@ -35,14 +32,8 @@ export interface ConnectedReduxProps<A extends Action = AnyAction> {
 /**
  * Application level reducer is a combination of all the reducers
  */
-const rootReducer = combineReducers({
- auth: authReducer,
-});
-
-/**
- * Helper method to create a store
- */
-export const appStore = createStore(
-  rootReducer,
-  applyMiddleware(thunkMiddleware)
-);
+export const createRootReducer = () => {
+  return combineReducers({
+    auth: authReducer,
+  });
+}
