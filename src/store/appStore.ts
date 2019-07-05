@@ -7,13 +7,17 @@
 import {
   Action,
   AnyAction,
+  applyMiddleware,
   combineReducers,
-  Dispatch
+  createStore,
+  Dispatch,
+  Store,
 } from 'redux';
 import {
   authReducer,
   AuthState
 } from './auth';
+import thunkMiddleware from 'redux-thunk';
 
 /**
  * Top level state object
@@ -36,4 +40,12 @@ export const createRootReducer = () => {
   return combineReducers({
     auth: authReducer,
   });
+};
+
+export const configureStore = (): Store<AppState> => {
+  const store = createStore(
+    createRootReducer(),
+    applyMiddleware(thunkMiddleware),
+  )
+  return store
 }
