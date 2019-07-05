@@ -9,7 +9,7 @@
  * the @@context patter to stay consistent with internal redux naming
  */
 export enum SearchActionTypes {
-  LOGIN = '@@search/getSearchResults',
+  GET_SEARCH_RESULTS = '@@search/getSearchResults',
 };
 
 /**
