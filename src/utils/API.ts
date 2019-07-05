@@ -15,4 +15,20 @@ export const get = <T>(endpoint: string): Promise<T> => {
       return data;
     });
 
+};
+
+/**
+ * Create an endpoint for the Ghost API
+ */
+export const getSearchEndpoint = <T>(query: string | '') =>  {
+
+  let ret = process.env.REACT_APP_API_URL_SEARCH;
+  ret += 'page=1&';
+  ret += 'include_adult=false&';
+  ret += 'language=en-US&';
+  ret += 'api_key=' + process.env.REACT_APP_API_KEY_BLOG + '?';
+  ret += query ? '&' + query : '';
+
+  return ret;
+
 }
