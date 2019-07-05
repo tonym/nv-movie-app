@@ -35,29 +35,47 @@ interface Props extends WithStyles<typeof styles> {
 };
 
 interface Values {
+  [index: string]: string;
   user: string | '';
   password: string | '';
+}
+
+interface Errors {
+  user: boolean;
+  password: boolean;
 }
 
 const LoginForm: React.FC<Props> = props => {
 
   const [values, setValues] = useState<Values>({user: '', password: ''});
+  const [errors, setErrors] = useState<Errors>({user: false, password: false});
+
+  const { callback, classes } = props;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setValues({ ...values, [event.target.name]: event.target.value });
   }
 
-  const validate = (event: React.MouseEvent<HTMLButtonElement>): void => {
+  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    let error: boolean = false;
 
+    for(const value in values) {
+      error = values[value].length === 0 ? true : false;
+      setErrors({ ...errors, [value]: error});
+    }
+
+    if(Object.values(errors).indexOf(true) === -1) {
+      callback(values);
+    }
   }
-
-  const { classes } = props;
 
   return (
     <div className={classes.root}>
       <TextField
         className={classes.textField}
+        error={errors.user}
         fullWidth
+        helperText={errors.user ? 'Username is required' : null}
         id="user"
         label="Username"
         margin="normal"
@@ -69,7 +87,9 @@ const LoginForm: React.FC<Props> = props => {
       />
       <TextField
         className={classes.textField}
+        error={errors.password}
         fullWidth
+        helperText={errors.password ? 'Password is required' : null}
         id="password"
         label="Password"
         margin="normal"
@@ -77,13 +97,13 @@ const LoginForm: React.FC<Props> = props => {
         onChange={handleChange}
         required
         type="password"
-        value={values.user}
+        value={values.password}
         variant="outlined"
       />
       <Button
         className={classes.button}
         color="primary"
-        onClick={validate}
+        onClick={handleSubmit}
         variant="contained"
       >
         Login

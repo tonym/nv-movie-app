@@ -43,11 +43,7 @@ const Header: React.FC<Props> = (props) => {
       <Toolbar>
         <Grid container justify="space-between">
           <Grid item>
-          {
-            user ?
-            <Typography color="inherit" variant="h5">I am an appbar</Typography> :
-            <Typography color="inherit" variant="h5">Login</Typography>
-          }
+            <Typography color="inherit" variant="h5">Movie-O-Matic</Typography>
           </Grid>
           <Grid item>
             {
