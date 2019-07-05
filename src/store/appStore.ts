@@ -17,6 +17,10 @@ import {
   authReducer,
   AuthState
 } from './auth';
+import {
+  searchReducer,
+  SearchState
+} from './search';
 import thunkMiddleware from 'redux-thunk';
 
 /**
@@ -24,6 +28,7 @@ import thunkMiddleware from 'redux-thunk';
  */
 export interface AppState {
   auth: AuthState;
+  search: SearchState;
 };
 
 /**
@@ -39,6 +44,7 @@ export interface ConnectedReduxProps<A extends Action = AnyAction> {
 export const createRootReducer = () => {
   return combineReducers({
     auth: authReducer,
+    search: searchReducer,
   });
 };
 
