@@ -6,7 +6,6 @@
 
 import React from 'react';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import Grid from '@material-ui/core/Grid';
@@ -14,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import createStyles from '@material-ui/core/styles/createStyles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
+import { AppState } from '../../store';
+import LoginForm from '../../forms/LoginForm';
 
 /**
  * Styles for HTML elements, and any child component overrides
@@ -24,14 +25,23 @@ const styles = (theme: Theme) => createStyles({
     paddingLeft: theme.spacing(3.5),
     paddingRight: theme.spacing(3.5),
     paddingTop: theme.spacing(20),
-  }
+  },
+  caption: {
+    paddingTop: theme.spacing(2),
+  },
+  card: {
+    maxWidth: theme.spacing(60),
+    width: '100%',
+  },
 });
 
 /**
  * Type interface, use an interface instead of PropTypes
  * WithStyles allows us to stay DRY by using the styles object to keep it type safe
  */
-interface Props extends WithStyles<typeof styles> {};
+interface Props extends WithStyles<typeof styles> {
+  app: AppState
+};
 
 const LoginView: React.FC<Props> = props => {
 
@@ -43,8 +53,18 @@ const LoginView: React.FC<Props> = props => {
 
   return (
     <div className={classes.root}>
-      <Grid container justify="center">
-        <Typography align="center">Login form goes here</Typography>
+      <Grid alignItems="center" container direction="column" justify="center">
+        <Card className={classes.card}>
+          <CardHeader title="Login" titleTypographyProps={{align: 'center'}} />
+          <CardContent>
+            <LoginForm />
+          </CardContent>
+        </Card>
+        <Typography className={classes.caption} paragraph variant="caption">
+          This is not a real login.
+          Enter whatever you like.
+          It's just a way to get a username so we can pretend it's a real app.
+        </Typography>
       </Grid>
     </div>
   );
