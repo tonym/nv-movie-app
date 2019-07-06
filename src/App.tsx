@@ -11,7 +11,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import routeConstants from './constants/routeConstants';
-import Header from './components/Header';
 import HomeView from './views/HomeView';
 import LoginView from './views/LoginView';
 import { AppState } from './store';
@@ -62,7 +61,6 @@ const App: React.FC<AppState> = props => {
         <CssBaseline />
         <BrowserRouter>
           <div className="app">
-          <Header user={user} />
             <Switch>
               <PrivateRoute path={routeConstants.ROOT} exact component={HomeView} authed={user} />
               <Route path={routeConstants.LOGIN} component={LoginView} />
@@ -74,7 +72,7 @@ const App: React.FC<AppState> = props => {
   );
 }
 
-function mapStateToProps(state: AppState) {
+const mapStateToProps = (state: AppState) => {
   return state;
 }
 

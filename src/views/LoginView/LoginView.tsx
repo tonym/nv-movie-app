@@ -19,12 +19,16 @@ import { AppState, ConnectedReduxProps } from '../../store';
 import { login } from '../../store/auth';
 import LoginForm from '../../forms/LoginForm';
 import routeConstants from '../../constants/routeConstants';
+import Header from '../../components/Header';
 
 /**
  * Styles for HTML elements, and any child component overrides
  */
 const styles = (theme: Theme) => createStyles({
   root: {
+
+  },
+  content: {
     paddingBottom: theme.spacing(10),
     paddingLeft: theme.spacing(3.5),
     paddingRight: theme.spacing(3.5),
@@ -58,6 +62,7 @@ interface PropsFromDispatch {
 }
 
 type AllProps = Props &
+  AppState &
   ConnectedReduxProps &
   PropsFromDispatch &
   RouteComponentProps<{}>;
@@ -69,6 +74,7 @@ const LoginView: React.FC<AllProps> = props => {
    * by the HOC 'withStyles' as 'classes'
    */
   const { classes, history } = props;
+  const { user } = props.auth;
 
   const loginFormCallback = async (values: Values) => {
     props.login(values.user);
@@ -76,23 +82,30 @@ const LoginView: React.FC<AllProps> = props => {
   }
 
   return (
-    <div className={classes.root}>
-      <Grid alignItems="center" container direction="column" justify="center">
-        <Card className={classes.card}>
-          <CardHeader title="Login" titleTypographyProps={{align: 'center'}} />
-          <CardContent>
-            <LoginForm callback={loginFormCallback} />
-          </CardContent>
-        </Card>
-        <Typography className={classes.caption} paragraph variant="caption">
-          This is not a real login.
-          Enter whatever you like.
-          It's just a way to get a username so we can pretend it's a real app.
-        </Typography>
-      </Grid>
+    <div className="root">
+      <Header user={user} />
+      <div className={classes.content}>
+        <Grid alignItems="center" container direction="column" justify="center">
+          <Card className={classes.card}>
+            <CardHeader title="Login" titleTypographyProps={{align: 'center'}} />
+            <CardContent>
+              <LoginForm callback={loginFormCallback} />
+            </CardContent>
+          </Card>
+          <Typography className={classes.caption} paragraph variant="subtitle2">
+            This is not a real login.
+            Enter whatever you like.
+            It's just a way to get a username so we can pretend it's a real app.
+          </Typography>
+        </Grid>
+      </div>
     </div>
   );
 
+}
+
+const mapStateToProps = (state: AppState) => {
+  return state;
 }
 
 const mapDispatchToProps = {
@@ -101,4 +114,4 @@ const mapDispatchToProps = {
 
 const styledComponent = withStyles(styles)(LoginView);
 
-export default withRouter(connect(undefined, mapDispatchToProps)(styledComponent));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(styledComponent));

@@ -1,6 +1,6 @@
 /**
- * @file LoginForm
- * @description Login form for auth
+ * @file SearchForm
+ * @description Search form for use in Header and HomeView, and anywhere else you want to search
  * @author tm
  */
 
@@ -45,7 +45,7 @@ interface Errors {
   password: boolean;
 }
 
-const LoginForm: React.FC<Props> = props => {
+const SearchForm: React.FC<Props> = props => {
 
   const [values, setValues] = useState<Values>({user: '', password: ''});
   const [errors, setErrors] = useState<Errors>({user: false, password: false});
@@ -57,25 +57,21 @@ const LoginForm: React.FC<Props> = props => {
   }
 
   const handleSubmit = () => {
-    const _errors = {user: values.user.length === 0, password: values.password.length === 0};
-    if(Object.values(_errors).indexOf(true) === -1) {
-      callback(values);
-    }
-    else {
-      setErrors(_errors);
-    }
-  }
+    let error: boolean = false;
 
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>): void => {
-    if(event.key === 'Enter') {
-      handleSubmit();
+    for(const value in values) {
+      error = values[value].length === 0 ? true : false;
+      setErrors({ ...errors, [value]: error});
+    }
+
+    if(Object.values(errors).indexOf(true) === -1) {
+      callback(values);
     }
   }
 
   return (
     <div className={classes.root}>
       <TextField
-        autoFocus
         className={classes.textField}
         error={errors.user}
         fullWidth
@@ -85,7 +81,6 @@ const LoginForm: React.FC<Props> = props => {
         margin="normal"
         name="user"
         onChange={handleChange}
-        onKeyPress={handleKeyPress}
         required
         value={values.user}
         variant="outlined"
@@ -100,7 +95,6 @@ const LoginForm: React.FC<Props> = props => {
         margin="normal"
         name="password"
         onChange={handleChange}
-        onKeyPress={handleKeyPress}
         required
         type="password"
         value={values.password}
@@ -119,4 +113,4 @@ const LoginForm: React.FC<Props> = props => {
 
 }
 
-export default withStyles(styles)(LoginForm);
+export default withStyles(styles)(SearchForm);
