@@ -44,7 +44,7 @@ const HomeView: React.FC<AllProps> = props => {
 
   const { classes, search } = props;
   const { user } = props.auth;
-  const { query, searchResults } = search;
+  const { isFetching, query, searchResults } = search;
 
   const handleSearchCallback = (values: Values): void => {
     props.getSearchResults(values.query);
@@ -54,7 +54,7 @@ const HomeView: React.FC<AllProps> = props => {
     <div className="root">
       <Header searchCallback={handleSearchCallback} user={user} />
       <div className={classes.content}>
-        {searchResults.hasOwnProperty('results') ?
+        {searchResults.hasOwnProperty('results') || isFetching ?
           <Search query={query} search={search} /> :
           <div className={classes.form}>
             <Typography align="center" gutterBottom variant="h4">

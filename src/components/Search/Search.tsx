@@ -22,7 +22,6 @@ const styles = (theme: Theme) => createStyles({
   circularProgress: {
     display: 'block',
     margin: 'auto',
-    paddingTop: theme.spacing(10),
   },
 });
 
