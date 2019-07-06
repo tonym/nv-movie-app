@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import createStyles from '@material-ui/core/styles/createStyles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
@@ -40,6 +41,8 @@ type AllProps = Props &
 
 const HomeView: React.FC<AllProps> = props => {
 
+  console.log(props);
+
   const { classes } = props;
   const { user } = props.auth;
   const { searchResults } = props.search;
@@ -62,15 +65,18 @@ const HomeView: React.FC<AllProps> = props => {
     </div>
   );
 
-}
+};
 
-function mapStateToProps(state: AppState) {
+const mapStateToProps = (state: AppState) => {
   return state;
-}
+};
 
-const mapDispatchToProps = {
-  getSearchResults,
-}
+const mapDispatchToProps = (dispatch: any) => {
+  return bindActionCreators({
+    getSearchResults,
+  },
+  dispatch);
+};
 
 const styledComponent = withStyles(styles)(HomeView);
 

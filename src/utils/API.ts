@@ -4,6 +4,12 @@
  * @author tm
  */
 
+interface SearchOptions {
+  page?: string;
+  include_adult?: string;
+  language?: string;
+}
+
 /**
  * GET from a REST API
  */
@@ -20,15 +26,23 @@ export const get = <T>(endpoint: string): Promise<T> => {
 /**
  * Create an endpoint for the Ghost API
  */
-export const getSearchEndpoint = <T>(query: string | '') =>  {
+export const getSearchEndpoint = <T>(query: string | '' = '', searchOptions: SearchOptions = {}): string =>  {
+
+  const defaultSearchOptions: SearchOptions = {
+    page: '1',
+    include_adult: 'false',
+    language: 'en-US'
+  }
+
+  const options = { ...defaultSearchOptions, searchOptions}
 
   let ret = process.env.REACT_APP_API_URL_SEARCH;
-  ret += 'page=1&';
-  ret += 'include_adult=false&';
-  ret += 'language=en-US&';
-  ret += 'api_key=' + process.env.REACT_APP_API_KEY_BLOG + '?';
-  ret += query ? '&' + query : '';
+  ret += 'page=' + options.page + '&';
+  ret += 'include_adult=' + options.include_adult + '&';
+  ret += 'language=' + options.language + '&';
+  ret += 'api_key=' + process.env.REACT_APP_API_KEY_SEARCH + '&';
+  ret += 'query=' + encodeURIComponent(query);
 
-  return ret;
+  return ret as string;
 
 }
