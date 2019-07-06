@@ -10,7 +10,7 @@ import { SearchActionTypes, SearchState } from './searchTypes';
 const initialState: SearchState = {
   error: false,
   isFetching: false,
-  searchResults: '',
+  searchResults: {},
 };
 
 const searchReducer: Reducer<SearchState> = (state = initialState, action) => {
