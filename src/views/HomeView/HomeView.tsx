@@ -50,7 +50,7 @@ const HomeView: React.FC<AllProps> = props => {
 
   return (
     <div className="root">
-      <Header user={user} />
+      <Header searchCallback={handleSearchCallback} user={user} />
       <div className={classes.content}>
         <div className={classes.form}>
           <Typography align="center" gutterBottom variant="h4">

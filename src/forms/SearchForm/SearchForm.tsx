@@ -28,7 +28,6 @@ const styles = (theme: Theme) => createStyles({
   },
   searchBar: {
     alignItems: 'center',
-    background: theme.palette.common.white,
     display: 'flex',
     flexGrow: 2,
     height: '100%',
@@ -93,12 +92,12 @@ interface Props extends WithStyles<typeof styles> {
 
 export interface Values {
   [index: string]: string;
-  search: string | '';
+  query: string | '';
 }
 
 const SearchForm: React.FC<Props> = (props) => {
 
-  const [values, setValues] = useState<Values>({ search: '' });
+  const [values, setValues] = useState<Values>({ query: '' });
   const [showSearch, setShowSearch] = useState(false);
 
   const { callback, classes, searchBar } = props;
@@ -106,7 +105,7 @@ const SearchForm: React.FC<Props> = (props) => {
   const placeholder = "Movie title, actore, genre, etc.";
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setValues({ ...values, search: event.target.value});
+    setValues({ ...values, query: event.target.value});
   }
 
   const handleShowSearch = (): void  => {
@@ -124,9 +123,36 @@ const SearchForm: React.FC<Props> = (props) => {
   }
 
   return (
-    <div className={classes.root}>
+    <React.Fragment>
       {searchBar ?
         <React.Fragment>
+        {showSearch ?
+          <div className={classes.searchBar}>
+            <Input
+              value={values.search}
+              type="search"
+              onChange={handleChange}
+              onKeyPress={handleKeyPress}
+              autoFocus
+              className={classes.searchContainer}
+              classes={{input: classes.searchInput}}
+              disableUnderline
+              placeholder={placeholder} />
+            <Hidden smDown>
+              <Button onClick={handleSubmit} color="primary" size="small" variant="contained">
+                <Search /> Search
+              </Button>
+            </Hidden>
+            <IconButton className={classes.searchButton} onClick={handleShowSearch}>
+              <Close className={classes.searchIcon} />
+            </IconButton>
+          </div> :
+          <IconButton className={classes.searchButton} onClick={handleShowSearch}>
+            <Search className={classes.searchIcon} />
+          </IconButton>
+        }
+        </React.Fragment> :
+        <div className={classes.root}>
           <TextField
             autoFocus
             className={classes.textField}
@@ -136,6 +162,7 @@ const SearchForm: React.FC<Props> = (props) => {
             margin="normal"
             name="search"
             onChange={handleChange}
+            onKeyPress={handleKeyPress}
             placeholder={placeholder}
             value={values.search}
             variant="outlined"
@@ -148,36 +175,9 @@ const SearchForm: React.FC<Props> = (props) => {
           >
             Search
           </Button>
-        </React.Fragment> :
-        <React.Fragment>
-          {showSearch ?
-            <div className={classes.searchBar}>
-              <Input
-                value={values.search}
-                type="search"
-                onChange={handleChange}
-                onKeyPress={handleKeyPress}
-                autoFocus
-                className={classes.searchContainer}
-                classes={{input: classes.searchInput}}
-                disableUnderline
-                placeholder={placeholder} />
-              <Hidden smDown>
-                <Button onClick={handleSubmit} color="primary" size="small" variant="contained">
-                  <Search /> Search
-                </Button>
-              </Hidden>
-              <IconButton className={classes.searchButton}>
-                <Close className={classes.searchIcon} onClick={handleShowSearch} />
-              </IconButton>
-            </div> :
-            <IconButton className={classes.searchButton}>
-              <Search className={classes.searchIcon} onClick={handleShowSearch} />
-            </IconButton>
-          }
-        </React.Fragment>
+        </div>
       }
-    </div>
+    </React.Fragment>
   )
 
 }
