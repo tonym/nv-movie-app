@@ -21,11 +21,21 @@ import { SearchResults } from '../../store/search';
  */
 const styles = (theme: Theme) => createStyles({
   root: {
-
+    width: '100%',
   },
   table: {
-
-  }
+    minWidth: 800,
+  },
+  tableCell: {
+    minWidth: 160,
+    whiteSpace: 'nowrap',
+    [theme.breakpoints.up('md')]: {
+      minWidth: 240,
+    },
+  },
+  tableWrapper: {
+    overflowX: 'auto',
+  },
 });
 
 /**
@@ -46,28 +56,30 @@ const SearchResultsGrid: React.FC<Props> = (props) => {
 
   return (
     <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Title</TableCell>
-            <TableCell>Release date</TableCell>
-            <TableCell>Description</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {
-            searchResults!.results!.map(result => {
-              return (
-                <TableRow key={result.title}>
-                  <TableCell component="th" scope="row">{result.title}</TableCell>
-                  <TableCell>{result.release_date}</TableCell>
-                  <TableCell>{result.overview}</TableCell>
-                </TableRow>
-              );
-            })
-          }
-        </TableBody>
-      </Table>
+      <div className={classes.tableWrapper}>
+        <Table className={classes.table}>
+          <TableHead>
+            <TableRow>
+              <TableCell className={classes.tableCell}>Title</TableCell>
+              <TableCell className={classes.tableCell}>Release date</TableCell>
+              <TableCell className={classes.tableCell}>Description</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {
+              searchResults!.results!.map(result => {
+                return (
+                  <TableRow key={result.title}>
+                    <TableCell component="th" scope="row">{result.title}</TableCell>
+                    <TableCell className={classes.tableCell}>{result.release_date}</TableCell>
+                    <TableCell>{result.overview}</TableCell>
+                  </TableRow>
+                );
+              })
+            }
+          </TableBody>
+        </Table>
+      </div>
     </Paper>
   );
 
