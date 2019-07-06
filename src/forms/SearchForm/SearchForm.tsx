@@ -9,7 +9,12 @@ import createStyles from '@material-ui/core/styles/createStyles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
+import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
+import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
+import Close from '@material-ui/icons/Close';
+import Search from '@material-ui/icons/Search';
 
 /**
  * Styles for HTML elements, and any child component overrides
@@ -20,6 +25,57 @@ const styles = (theme: Theme) => createStyles({
   },
   button: {
     marginTop: theme.spacing(3),
+  },
+  searchBar: {
+    alignItems: 'center',
+    background: theme.palette.common.white,
+    display: 'flex',
+    flexGrow: 2,
+    height: '100%',
+    justifyContent: 'flex-end',
+    paddingLeft: theme.spacing(3),
+    zIndex: 1000,
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: 0,
+      paddingRight: theme.spacing(3),
+      position: 'absolute',
+      right: 0,
+      top: 0,
+      width: '100%'
+    }
+  },
+  searchButton: {
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.down('sm')]: {
+      marginRight: 0
+    }
+  },
+  searchContainer: {
+    flexGrow: 1,
+    height: '100%',
+    paddingLeft: theme.spacing(3),
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '24px'
+    }
+  },
+  searchIcon: {
+    height: theme.spacing(4),
+    width: theme.spacing(4),
+    [theme.breakpoints.down('sm')]: {
+      height: theme.spacing(5),
+      width: theme.spacing(5),
+    }
+  },
+  searchInput: {
+    [theme.breakpoints.up('md')]: {
+      borderColor: theme.palette.grey[500],
+      borderRadius: theme.spacing(.5),
+      borderStyle: 'solid',
+      borderWidth: '1px',
+      marginRight: theme.spacing(1),
+      padding: theme.spacing(1),
+    },
   },
   textField: {
 
@@ -32,82 +88,95 @@ const styles = (theme: Theme) => createStyles({
  */
 interface Props extends WithStyles<typeof styles> {
   callback: (values: Values) => void;
+  searchBar: boolean;
 };
 
-interface Values {
+export interface Values {
   [index: string]: string;
-  user: string | '';
-  password: string | '';
+  search: string | '';
 }
 
-interface Errors {
-  user: boolean;
-  password: boolean;
-}
+const SearchForm: React.FC<Props> = (props) => {
 
-const SearchForm: React.FC<Props> = props => {
+  const [values, setValues] = useState<Values>({ search: '' });
+  const [showSearch, setShowSearch] = useState(false);
 
-  const [values, setValues] = useState<Values>({user: '', password: ''});
-  const [errors, setErrors] = useState<Errors>({user: false, password: false});
+  const { callback, classes, searchBar } = props;
 
-  const { callback, classes } = props;
+  const placeholder = "Movie title, actore, genre, etc.";
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setValues({ ...values, [event.target.name]: event.target.value });
+    setValues({ ...values, search: event.target.value});
   }
 
-  const handleSubmit = () => {
-    let error: boolean = false;
+  const handleShowSearch = (): void  => {
+    setShowSearch(!showSearch);
+  }
 
-    for(const value in values) {
-      error = values[value].length === 0 ? true : false;
-      setErrors({ ...errors, [value]: error});
-    }
+  const handleSubmit = (): void => {
+    callback(values);
+  }
 
-    if(Object.values(errors).indexOf(true) === -1) {
-      callback(values);
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+    if(event.key === 'Enter') {
+      handleSubmit();
     }
   }
 
   return (
     <div className={classes.root}>
-      <TextField
-        className={classes.textField}
-        error={errors.user}
-        fullWidth
-        helperText={errors.user ? 'Username is required' : null}
-        id="user"
-        label="Username"
-        margin="normal"
-        name="user"
-        onChange={handleChange}
-        required
-        value={values.user}
-        variant="outlined"
-      />
-      <TextField
-        className={classes.textField}
-        error={errors.password}
-        fullWidth
-        helperText={errors.password ? 'Password is required' : null}
-        id="password"
-        label="Password"
-        margin="normal"
-        name="password"
-        onChange={handleChange}
-        required
-        type="password"
-        value={values.password}
-        variant="outlined"
-      />
-      <Button
-        className={classes.button}
-        color="primary"
-        onClick={handleSubmit}
-        variant="contained"
-      >
-        Login
-      </Button>
+      {searchBar ?
+        <React.Fragment>
+          <TextField
+            autoFocus
+            className={classes.textField}
+            fullWidth
+            id="search"
+            label="Search"
+            margin="normal"
+            name="search"
+            onChange={handleChange}
+            placeholder={placeholder}
+            value={values.search}
+            variant="outlined"
+          />
+          <Button
+            className={classes.button}
+            color="primary"
+            onClick={handleSubmit}
+            variant="contained"
+          >
+            Search
+          </Button>
+        </React.Fragment> :
+        <React.Fragment>
+          {showSearch ?
+            <div className={classes.searchBar}>
+              <Input
+                value={values.search}
+                type="search"
+                onChange={handleChange}
+                onKeyPress={handleKeyPress}
+                autoFocus
+                className={classes.searchContainer}
+                classes={{input: classes.searchInput}}
+                disableUnderline
+                placeholder={placeholder} />
+              <Hidden smDown>
+                <Button onClick={handleSubmit} color="primary" size="small" variant="contained">
+                  <Search /> Search
+                </Button>
+              </Hidden>
+              <IconButton className={classes.searchButton}>
+                <Close className={classes.searchIcon} onClick={handleShowSearch} />
+              </IconButton>
+            </div> :
+            <IconButton className={classes.searchButton}>
+              <Search className={classes.searchIcon} onClick={handleShowSearch} />
+            </IconButton>
+          }
+        </React.Fragment>
+      }
     </div>
   )
 

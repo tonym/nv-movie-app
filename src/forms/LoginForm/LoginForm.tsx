@@ -34,7 +34,7 @@ interface Props extends WithStyles<typeof styles> {
   callback: (values: Values) => void;
 };
 
-interface Values {
+export interface Values {
   [index: string]: string;
   user: string | '';
   password: string | '';

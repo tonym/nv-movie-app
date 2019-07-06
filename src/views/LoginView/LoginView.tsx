@@ -17,7 +17,7 @@ import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 import { AppState, ConnectedReduxProps } from '../../store';
 import { login } from '../../store/auth';
-import LoginForm from '../../forms/LoginForm';
+import LoginForm, { Values } from '../../forms/LoginForm';
 import routeConstants from '../../constants/routeConstants';
 import Header from '../../components/Header';
 
@@ -47,15 +47,7 @@ const styles = (theme: Theme) => createStyles({
  * Type interface, use an interface instead of PropTypes
  * WithStyles allows us to stay DRY by using the styles object to keep it type safe
  */
-interface Props extends WithStyles<typeof styles> {
-  app: AppState;
-};
-
-interface Values {
-  [index: string]: string;
-  user: string | '';
-  password: string | '';
-}
+interface Props extends WithStyles<typeof styles> {};
 
 interface PropsFromDispatch {
   login: typeof login;
@@ -76,7 +68,7 @@ const LoginView: React.FC<AllProps> = props => {
   const { classes, history } = props;
   const { user } = props.auth;
 
-  const loginFormCallback = async (values: Values) => {
+  const loginFormCallback = (values: Values) => {
     props.login(values.user);
     history.push(routeConstants.ROOT);
   }
