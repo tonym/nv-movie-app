@@ -18,9 +18,9 @@ export enum SearchActionTypes {
  * Declare the types and values expected in the API response
  */
 interface Results {
-  overview: string
-  release_date: string;
-  title: string;
+  overview?: string
+  release_date?: string;
+  title?: string;
 };
 
 export interface SearchResults {
