@@ -12,6 +12,7 @@ export enum SearchActionTypes {
   ERROR = '@@search/error',
   IS_FETCHING = '@@search/isFetching',
   GET_SEARCH_RESULTS = '@@search/getSearchResults',
+  SET_QUERY = '@@search/setQuery',
 };
 
 /**
@@ -36,5 +37,6 @@ export interface SearchResults {
 export interface SearchState {
   readonly error: boolean;
   readonly isFetching: boolean;
+  readonly query: string;
   readonly searchResults: SearchResults;
 };

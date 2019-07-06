@@ -139,7 +139,7 @@ const SearchForm: React.FC<Props> = (props) => {
               disableUnderline
               placeholder={placeholder} />
             <Hidden smDown>
-              <Button onClick={handleSubmit} color="primary" size="small" variant="contained">
+              <Button onClick={handleSubmit} color="default" size="small" variant="contained">
                 <Search /> Search
               </Button>
             </Hidden>

@@ -19,7 +19,7 @@ const styles = (theme: Theme) => createStyles({
     paddingBottom: theme.spacing(10),
     paddingLeft: theme.spacing(3.5),
     paddingRight: theme.spacing(3.5),
-    paddingTop: theme.spacing(15),
+    paddingTop: theme.spacing(12),
   },
   form: {
     padding: theme.spacing(2),
@@ -44,7 +44,7 @@ const HomeView: React.FC<AllProps> = props => {
 
   const { classes, search } = props;
   const { user } = props.auth;
-  const { searchResults } = search;
+  const { query, searchResults } = search;
 
   const handleSearchCallback = (values: Values): void => {
     props.getSearchResults(values.query);
@@ -55,7 +55,7 @@ const HomeView: React.FC<AllProps> = props => {
       <Header searchCallback={handleSearchCallback} user={user} />
       <div className={classes.content}>
         {searchResults.hasOwnProperty('results') ?
-          <Search search={search} /> :
+          <Search query={query} search={search} /> :
           <div className={classes.form}>
             <Typography align="center" gutterBottom variant="h4">
               Let's get started
