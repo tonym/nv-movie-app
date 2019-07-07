@@ -103,7 +103,7 @@ const SearchForm: React.FC<Props> = (props) => {
 
   const { callback, classes, searchBar } = props;
 
-  const placeholder = "Movie title, actore, genre, etc.";
+  const placeholder = "Movie title, actor, genre, etc.";
   const mobilePlaceholder = "Search";
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
