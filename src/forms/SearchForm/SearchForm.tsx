@@ -35,6 +35,8 @@ const styles = (theme: Theme) => createStyles({
     paddingLeft: theme.spacing(3),
     zIndex: 1000,
     [theme.breakpoints.down('sm')]: {
+      background: theme.palette.background.paper,
+      minHeight: 64,
       paddingLeft: 0,
       paddingRight: theme.spacing(3),
       position: 'absolute',
@@ -103,6 +105,7 @@ const SearchForm: React.FC<Props> = (props) => {
   const { callback, classes, searchBar } = props;
 
   const placeholder = "Movie title, actore, genre, etc.";
+  const mobilePlaceholder = "Search";
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setValues({ ...values, query: event.target.value});
@@ -137,7 +140,7 @@ const SearchForm: React.FC<Props> = (props) => {
               className={classes.searchContainer}
               classes={{input: classes.searchInput}}
               disableUnderline
-              placeholder={placeholder} />
+              placeholder={mobilePlaceholder} />
             <Hidden smDown>
               <Button onClick={handleSubmit} color="default" size="small" variant="contained">
                 <Search /> Search

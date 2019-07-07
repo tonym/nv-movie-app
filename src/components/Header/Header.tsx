@@ -7,6 +7,7 @@
 import * as React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
+import Hidden from '@material-ui/core/Hidden';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import createStyles from '@material-ui/core/styles/createStyles';
@@ -64,9 +65,11 @@ const Header: React.FC<Props> = (props) => {
               }
               {
                 user ?
-                <Grid item>
-                  <Typography color="inherit" variant="h5">Search goes here</Typography>
-                </Grid> :
+                <Hidden smDown>
+                  <Grid item>
+                    <Typography color="inherit" variant="h5">Search goes here</Typography>
+                  </Grid>
+                </Hidden> :
                 null
               }
             </Grid>

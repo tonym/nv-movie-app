@@ -21,6 +21,7 @@ import { SearchResults } from '../../store/search';
  */
 const styles = (theme: Theme) => createStyles({
   root: {
+    marginTop: theme.spacing(3.5),
     width: '100%',
   },
   table: {
