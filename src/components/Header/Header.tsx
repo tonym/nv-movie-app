@@ -6,6 +6,7 @@
 
 import * as React from 'react';
 import AppBar from '@material-ui/core/AppBar';
+import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -21,7 +22,10 @@ import SearchForm, { Values } from '../../forms/SearchForm';
 const styles = (theme: Theme) => createStyles({
   root: {
 
-  }
+  },
+  avatar: {
+    margin: 10,
+  },
 });
 
 /**
@@ -67,7 +71,12 @@ const Header: React.FC<Props> = (props) => {
                 user ?
                 <Hidden smDown>
                   <Grid item>
-                    <Typography color="inherit" variant="h5">Search goes here</Typography>
+                    <Avatar alt="fake avatar" className={classes.avatar} src="/assets/images/avatar.jpg"></Avatar>
+                  </Grid>
+                  <Grid item>
+                    <Typography color="inherit" variant="h6">
+                      {user}
+                    </Typography>
                   </Grid>
                 </Hidden> :
                 null
