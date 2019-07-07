@@ -93,7 +93,6 @@ interface Props extends WithStyles<typeof styles> {
 };
 
 export interface Values {
-  [index: string]: string;
   query: string | '';
 }
 
@@ -132,7 +131,7 @@ const SearchForm: React.FC<Props> = (props) => {
         {showSearch ?
           <div className={classes.searchBar}>
             <Input
-              value={values.search}
+              value={values.query}
               type="search"
               onChange={handleChange}
               onKeyPress={handleKeyPress}
@@ -167,7 +166,7 @@ const SearchForm: React.FC<Props> = (props) => {
             onChange={handleChange}
             onKeyPress={handleKeyPress}
             placeholder={placeholder}
-            value={values.search}
+            value={values.query}
             variant="outlined"
           />
           <Button

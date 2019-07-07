@@ -35,7 +35,6 @@ interface Props extends WithStyles<typeof styles> {
 };
 
 export interface Values {
-  [index: string]: string;
   user: string | '';
   password: string | '';
 }
