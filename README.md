@@ -28,7 +28,7 @@ To run tests, run the test script:
 
 To see test coverage (which is less than 100%), run:
 1. npm run test -- --coverage
-Notice the -- in the middle? It's not a typo.
+(Notice the -- in the middle? It's not a typo.)
 
 For the login page, enter whatever you want.
 Auth isn't a thing in this app, it just uses what you give it, but it's a nice way to collect a user name, and display it in the app bar.
