@@ -50,3 +50,7 @@ It can be cleaned up, but the Webpack config out of the box works well, and in t
 The initial page is a search form.
 The search form may also be accessed in the app bar.
 Once the inital search is complete, empty state is represented by a no results message, and the search form in the app bar may again be used.
+
+The UI is responsive.
+You can use it on a phone, however, it does follow the overflow (side scrolling) pattern for large tables.
+While the UI here uses the layout and components from Material-UI, other data display components (such as react-virtualized) are more suited to mobile.
