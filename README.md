@@ -1,44 +1,52 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Installation
 
-In the project directory, you can run:
+1. npm install
+2. npm start
+3. It should open the landing page in a browser, but, if it doesn't, navigate to localhost:3000
 
-### `npm start`
+### The stack
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Typescript (https://www.typescriptlang.org/)
+2. React (Create React App) (https://facebook.github.io/create-react-app/)
+3. Redux (https://redux.js.org/)
+4. redux-thunk (https://github.com/reduxjs/redux-thunk)
+5. Material-UI (https://material-ui.com/)
+6. Jest (https://jestjs.io/en/)
+7. Enzyme (https://airbnb.io/enzyme/)
+8. Some other packages to mock async requests for testing. They can be found in package.js
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### Notes
 
-### `npm test`
+The .env file contains the API connection stuff (URL, and API key).
+This file should NEVER be in a respository, however, since this is a pretend app, I put it there to make installation easier.
+In production, however, this is poor practice.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To run tests, run the test script:
+1. npm run test
 
-### `npm run build`
+To see test coverage (which is less than 100%), run:
+1. npm run test -- --coverage
+Notice the -- in the middle? It's not a typo.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+For the login page, enter whatever you want.
+Auth isn't a thing in this app, it just uses what you give it, but it's a nice way to collect a user name, and display it in the app bar.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+The avatar isn't real, and you can't change it.
+It's just a dummy user, and the file is located at /assets/images/avatar.jpg
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+There is no paging.
+While paging is certainly possible, time permitting, in this context, it may be unnecessary.
+Should paging be in scope, it can be added.
 
-### `npm run eject`
+There is no table column sorting.
+As with paging, it is certainly possible with little effort, however, in this context, it may also be unnecessary.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The package.json file is too big.
+It's what you get when you eject Create React App.
+It can be cleaned up, but the Webpack config out of the box works well, and in this context, is acceptible technical debt.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+The initial page is a search form.
+The search form may also be accessed in the app bar.
+Once the inital search is complete, empty state is represented by a no results message, and the search form in the app bar may again be used.
