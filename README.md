@@ -35,7 +35,7 @@ Auth isn't a thing in this app, it just uses what you give it, but it's a nice w
 
 The avatar isn't real, and you can't change it.
 It's just a dummy user, and the file is located at /assets/images/avatar.jpg.
-OK, so, yes, in fact, you can change it by chaning the picture, but you can't do it through the UI.
+OK, so, yes, in fact, you can change it by changing the picture, but you can't do it through the UI.
 
 There is no paging.
 While paging is certainly possible, time permitting, in this context, it may be unnecessary.
