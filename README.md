@@ -33,21 +33,6 @@ To see test coverage (which is less than 100%), run:
 For the login page, enter whatever you want.
 Auth isn't a thing in this app, it just uses what you give it, but it's a nice way to collect a user name, and display it in the app bar.
 
-The avatar isn't real, and you can't change it.
-It's just a dummy user, and the file is located at /assets/images/avatar.jpg.
-OK, so, yes, in fact, you can change it by changing the picture, but you can't do it through the UI.
-
-There is no paging.
-While paging is certainly possible, time permitting, in this context, it may be unnecessary.
-Should paging be in scope, it can be added.
-
-There is no table column sorting.
-As with paging, it is certainly possible with little effort, however, in this context, it may also be unnecessary.
-
-The package.json file is too big.
-It's what you get when you eject Create React App.
-It can be cleaned up, but the Webpack config out of the box works well, and in this context, is acceptible technical debt.
-
 The initial page is a search form.
 The search form may also be accessed in the app bar.
 Once the inital search is complete, empty state is represented by a no results message, and the search form in the app bar may again be used.
