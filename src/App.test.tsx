@@ -11,5 +11,4 @@ Enzyme.configure({ adapter: new Adapter() });
 it('renders without crashing', () => {
   const store = configureStore();
   mount(<Provider store={store}><App /></Provider>);
-
 });

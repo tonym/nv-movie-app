@@ -1,6 +1,6 @@
 import { action } from 'typesafe-actions';
 import { login, logout } from './authActions';
-import { authReducer } from './authReducer';
+import { authReducer, initialState } from './authReducer';
 import { AuthActionTypes } from './authTypes';
 
 describe('Auth actions', () => {
@@ -25,13 +25,13 @@ describe('Auth reducer', () => {
   const logoutAction = action(AuthActionTypes.LOGOUT);
 
   it('should return the initial state', () => {
-    expect(authReducer(undefined, {})).toEqual({
+    expect(authReducer(undefined, { type: undefined })).toEqual({
       user: '',
     });
   });
 
   it('should handle LOGIN', () => {
-    expect(authReducer({}, loginAction)).toEqual({
+    expect(authReducer(initialState, loginAction)).toEqual({
       user: user,
     });
   });

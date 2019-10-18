@@ -1,9 +1,3 @@
-/**
- * @file index
- * @description store types and helpers
- * @author tm
- */
-
 import {
   Action,
   AnyAction,

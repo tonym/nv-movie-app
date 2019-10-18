@@ -1,9 +1,3 @@
-/**
- * @file authReducer
- * @description redux reducer for login
- * @author tm
- */
-
 import { Reducer } from 'redux';
 import { AuthActionTypes, AuthState } from './authTypes';
 

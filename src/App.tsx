@@ -1,43 +1,20 @@
-/**
-* @file App
-* @description Main application file
-* @author tm
-*/
-
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import routeConstants from './constants/routeConstants';
 import HomeView from './views/HomeView';
 import LoginView from './views/LoginView';
 import { AppState } from './store';
 
-/**
- * MUI theme starts with the default theme, which is a light theme.
- * Pass an argument to createMuiTheme to override default styles.
- * Here the light, default theme, is set to dark.
- * Details on theme customization are here:
- * https://material-ui.com/customization/themes/
- * The default theme object can be inspected here:
- * https://material-ui.com/customization/default-theme/
- */
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
   }
 });
 
-/**
- * Private routes require some sort of authentication.
- * Usually this is a result of auth against a domain endpoint
- * Here it's just pretend. There is no real auth, it's simulated
- * by using a login view to collect a user's name, then
- * adding it to state. If there is a user in state, private
- * routes can load. If not, the login view will appear.
- */
 const PrivateRoute = ({ component: Component, authed, ...rest }: any) => (
 
   <Route {...rest} render={(props) => (
@@ -57,7 +34,7 @@ const App: React.FC<AppState> = props => {
 
   return (
     <React.Fragment>
-      <MuiThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
           <div className="app">
@@ -67,7 +44,7 @@ const App: React.FC<AppState> = props => {
             </Switch>
           </div>
         </BrowserRouter>
-      </MuiThemeProvider>
+      </ThemeProvider>
     </React.Fragment>
   );
 }
