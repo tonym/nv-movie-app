@@ -1,9 +1,3 @@
-/**
- * @file searchReducer
- * @description redux reducer for search
- * @author tm
- */
-
 import { Reducer } from 'redux';
 import { SearchActionTypes, SearchState } from './searchTypes';
 

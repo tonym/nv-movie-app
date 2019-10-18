@@ -1,9 +1,3 @@
-/**
- * @file searchActions
- * @descriptions actions for search
- * @author tm
- */
-
 import { action } from 'typesafe-actions';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
