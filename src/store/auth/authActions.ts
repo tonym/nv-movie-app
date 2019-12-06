@@ -1,10 +1,10 @@
 import { action } from 'typesafe-actions';
-import { AuthActionTypes } from './authTypes';
+import { LOGIN, LOGOUT } from './authTypes';
 
 export const login = (user: string) => {
-  return  action(AuthActionTypes.LOGIN, user);
+  return  action(LOGIN, user);
 }
 
 export const logout = () => {
-  return action(AuthActionTypes.LOGOUT);
+  return action(LOGOUT);
 }

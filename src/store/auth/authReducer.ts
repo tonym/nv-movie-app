@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { AuthActionTypes, AuthState } from './authTypes';
+import { LOGIN, LOGOUT, AuthState } from './authTypes';
 
 const initialState: AuthState = {
   user: '',
@@ -7,13 +7,13 @@ const initialState: AuthState = {
 
 const authReducer: Reducer<AuthState> = (state = initialState, action) => {
   switch(action.type) {
-    case AuthActionTypes.LOGIN:
+    case LOGIN:
       return { ...state, user: action.payload };
-    case AuthActionTypes.LOGOUT:
+    case LOGOUT:
       return { ...state, user: '' };
     default:
       return state;
   }
 };
 
-export { authReducer };
+export { authReducer, initialState };
