@@ -1,18 +1,9 @@
-/**
- * @file API service
- * @description Service methods for REST APIs
- * @author tm
- */
-
 interface SearchOptions {
   page?: string;
   include_adult?: string;
   language?: string;
 }
 
-/**
- * GET from a REST API
- */
 export const get = <T>(endpoint: string): Promise<T> => {
 
   return fetch(endpoint).then(response => {
@@ -23,9 +14,6 @@ export const get = <T>(endpoint: string): Promise<T> => {
 
 };
 
-/**
- * Create an endpoint for the Ghost API
- */
 export const getSearchEndpoint = <T>(query: string | '' = '', searchOptions: SearchOptions = {}): string =>  {
 
   const defaultSearchOptions: SearchOptions = {

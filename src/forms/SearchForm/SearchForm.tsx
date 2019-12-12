@@ -1,9 +1,3 @@
-/**
- * @file SearchForm
- * @description Search form for use in Header and HomeView, and anywhere else you want to search
- * @author tm
- */
-
 import React, { useState } from 'react';
 import createStyles from '@material-ui/core/styles/createStyles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';

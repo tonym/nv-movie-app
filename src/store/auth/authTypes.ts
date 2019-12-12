@@ -1,7 +1,3 @@
-/**
- * Naming conventions don't really matter here, but the @@context/action
- * pattern is consistent with internal redux naming
- */
 export const  LOGIN = '@@auth/login';
 export const  LOGOUT = '@@auth/logout';
 

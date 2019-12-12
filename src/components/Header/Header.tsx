@@ -1,9 +1,3 @@
-/**
- * @file Header
- * @description Global page Header
- * @author tm
- */
-
 import * as React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Avatar from '@material-ui/core/Avatar';
@@ -16,9 +10,6 @@ import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 import SearchForm, { Values } from '../../forms/SearchForm';
 
-/**
- * Styles for HTML elements, and any child component overrides
- */
 const styles = (theme: Theme) => createStyles({
   root: {
 
@@ -28,10 +19,6 @@ const styles = (theme: Theme) => createStyles({
   },
 });
 
-/**
- * Type interface, use an interface instead of PropTypes
- * WithStyles allows us to stay DRY by using the styles object to keep it type safe
- */
 interface Props extends WithStyles<typeof styles> {
   user: string;
   searchCallback?: (values: Values) => void;
@@ -39,10 +26,6 @@ interface Props extends WithStyles<typeof styles> {
 
 const Header: React.FC<Props> = (props) => {
 
-  /**
-   * the styles from above are added to the component props
-   * by the HOC 'withStyles' as 'classes'
-   */
   const { classes, user, searchCallback } = props;
 
   const handleSearchCallback = (values: Values): void => {

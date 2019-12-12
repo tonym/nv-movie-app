@@ -1,9 +1,3 @@
-/**
- * @file LoginView
- * @description This is the login view, which loads if there is no user in state
- * @author tm
- */
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
@@ -21,9 +15,6 @@ import LoginForm, { Values } from '../../forms/LoginForm';
 import routeConstants from '../../constants/routeConstants';
 import Header from '../../components/Header';
 
-/**
- * Styles for HTML elements, and any child component overrides
- */
 const styles = (theme: Theme) => createStyles({
   root: {
 
@@ -43,10 +34,6 @@ const styles = (theme: Theme) => createStyles({
   },
 });
 
-/**
- * Type interface, use an interface instead of PropTypes
- * WithStyles allows us to stay DRY by using the styles object to keep it type safe
- */
 interface Props extends WithStyles<typeof styles> {};
 
 interface PropsFromDispatch {

@@ -1,9 +1,3 @@
-/**
- * @file Search
- * @description Wrapper for SearchResults
- * @author tm
- */
-
 import * as React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
@@ -13,9 +7,6 @@ import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 import SearchResultsGrid from '../../components/SearchResultsGrid';
 import { SearchState } from '../../store/search';
 
-/**
- * Styles for HTML elements, and any child component overrides
- */
 const styles = (theme: Theme) => createStyles({
   root: {
   },
@@ -32,10 +23,6 @@ interface Props extends WithStyles<typeof styles> {
 
 const Search: React.FC<Props> = props => {
 
-  /**
-   * the styles from above are added to the component props
-   * by the HOC 'withStyles' as 'classes'
-   */
   const { classes, query, search } = props;
 
   return (

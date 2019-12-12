@@ -1,9 +1,3 @@
-/**
- * @file LoginForm
- * @description Login form for auth
- * @author tm
- */
-
 import React, { useState } from 'react';
 import createStyles from '@material-ui/core/styles/createStyles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
@@ -11,9 +5,6 @@ import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-/**
- * Styles for HTML elements, and any child component overrides
- */
 const styles = (theme: Theme) => createStyles({
   root: {
     textAlign: 'center',
@@ -26,10 +17,6 @@ const styles = (theme: Theme) => createStyles({
   }
 });
 
-/**
- * Type interface, use an interface instead of PropTypes
- * WithStyles allows us to stay DRY by using the styles object to keep it type safe
- */
 interface Props extends WithStyles<typeof styles> {
   callback: (values: Values) => void;
 };
