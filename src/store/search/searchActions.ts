@@ -9,9 +9,9 @@ export const getSearchResults = (query: string): ThunkAction<Promise<void>, {}, 
   const endpoint = getSearchEndpoint(query);
 
   return  async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
-    await dispatch(action(SearchActionTypes.IS_FETCHING, true));
-    await dispatch(action(SearchActionTypes.SET_QUERY, query));
-    await get(endpoint)
+    dispatch(action(SearchActionTypes.IS_FETCHING, true));
+    dispatch(action(SearchActionTypes.SET_QUERY, query));
+    get(endpoint)
       .then(
         searchResults => {
           dispatch(action(SearchActionTypes.GET_SEARCH_RESULTS, searchResults));

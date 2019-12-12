@@ -25,10 +25,6 @@ const styles = (theme: Theme) => createStyles({
   },
 });
 
-/**
- * Type interface, use an interface instead of PropTypes
- * WithStyles allows us to stay DRY by using the styles object to keep it type safe
- */
 interface Props extends WithStyles<typeof styles> {
   query?: string;
   search?: SearchState;
