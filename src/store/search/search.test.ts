@@ -1,6 +1,7 @@
-import configureMockStore from 'redux-mock-store'
-import fetchMock from 'fetch-mock'
-import thunk from 'redux-thunk'
+import configureMockStore from 'redux-mock-store';
+import fetchMock from 'fetch-mock';
+import thunk, { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
 import { action } from 'typesafe-actions';
 import { getSearchResults } from './searchActions';
 import { searchReducer } from './searchReducer';
@@ -48,8 +49,10 @@ describe('Search async actions', () => {
     ];
 
     const store = mockStore(mockState);
+    type MockThunkDispatch = ThunkDispatch<{}, {}, AnyAction>;
+    const thunkDispatch = store.dispatch as MockThunkDispatch;
 
-    return store.dispatch(getSearchResults(query)).then(() => {
+    thunkDispatch(getSearchResults(query)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
 
@@ -60,7 +63,7 @@ describe('Search async actions', () => {
 describe('Search reducer', () => {
 
   it('should return the initial state', () => {
-    expect(searchReducer(undefined, {})).toEqual(initialState);
+    expect(searchReducer(undefined, { type: undefined })).toEqual(initialState);
   });
 
   it('should return an error, with state.error = true', () => {
