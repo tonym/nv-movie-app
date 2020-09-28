@@ -4,33 +4,26 @@ interface SearchOptions {
   language?: string;
 }
 
-export const get = <T>(endpoint: string): Promise<T> => {
+export const get = async <T>(endpoint: string): Promise<T> => {
 
-  return fetch(endpoint).then(response => {
-      return response.ok ? response.json() : Promise.reject(response.statusText);
-    }).then(data => {
-      return data;
-    });
+  const response = await fetch(endpoint);
+  const data = await (response.ok ? response.json() : Promise.reject(response.statusText));
+  return data;
 
 };
 
-export const getSearchEndpoint = <T>(query: string | '' = '', searchOptions: SearchOptions = {}): string =>  {
+export const getSearchEndpoint = <T>(query: string | '' = '', searchOptions: SearchOptions = {}): string => {
 
   const defaultSearchOptions: SearchOptions = {
     page: '1',
     include_adult: 'false',
     language: 'en-US'
-  }
+  };
 
-  const options = { ...defaultSearchOptions, searchOptions}
+  const options = { ...defaultSearchOptions, searchOptions };
+  const { page, include_adult, language } = options;
+  const { REACT_APP_API_URL_SEARCH, REACT_APP_API_KEY_SEARCH } = process.env;
+  const encodedQuery = encodeURIComponent(query);
 
-  let ret = process.env.REACT_APP_API_URL_SEARCH;
-  ret += 'page=' + options.page + '&';
-  ret += 'include_adult=' + options.include_adult + '&';
-  ret += 'language=' + options.language + '&';
-  ret += 'api_key=' + process.env.REACT_APP_API_KEY_SEARCH + '&';
-  ret += 'query=' + encodeURIComponent(query);
-
-  return ret as string;
-
-}
+  return `${REACT_APP_API_URL_SEARCH}page=${page}&include_adult=${include_adult}&language=${language}&api_key=${REACT_APP_API_KEY_SEARCH}&query=${encodedQuery}`;
+};

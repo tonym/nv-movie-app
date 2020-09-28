@@ -7,8 +7,9 @@ import { get, getSearchEndpoint } from '../../utils';
 export const getSearchResults = (query: string): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
 
   const endpoint = getSearchEndpoint(query);
+  console.log(endpoint);
 
-  return  async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
     dispatch(action(SearchActionTypes.IS_FETCHING, true));
     dispatch(action(SearchActionTypes.SET_QUERY, query));
     get(endpoint)
